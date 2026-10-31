@@ -75,7 +75,6 @@ retro_game/
 ├── server.js           # Zero-dependency local Node.js static server
 ├── vercel.json         # Vercel deployment and routing configuration
 ├── README.md           # Professional project documentation
-├── LAB_DEMO_GUIDE.md   # Oral viva & professor presentation reference
 ├── lib/
 │   └── phaser.min.js   # Local Phaser 3 distribution (100% offline)
 └── js/
