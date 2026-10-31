@@ -1,15 +1,4 @@
-/**
- * COMMIT QUEST — Gameplay Objects (objects.js)
- * 
- * Defines collectibles, hazards, power-ups, and interactive entities:
- * 1. FileToken: Basic collectible (+10 score, small floating pulse).
- * 2. CommitCrystal: Rare collectible (+25 score, glowing rotation).
- * 3. BugBot: Enemy hazard (patrols back and forth on platforms, deals -1 life).
- * 4. StashShield: Power-up (absorbs next hazard damage with protective aura).
- * 5. MergeConflictHazard: Obstacle representing unresolved code conflicts.
- * 6. BranchPortal: Teleportation gateway between repository branches.
- */
-
+// Collectibles, hazards, and portals
 class FileToken {
     constructor(scene, x, y, knowledgeTip = null) {
         this.scene = scene;

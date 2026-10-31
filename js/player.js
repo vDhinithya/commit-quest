@@ -1,23 +1,5 @@
-/**
- * COMMIT QUEST — Player Entity (player.js)
- * 
- * Represents the developer character trapped inside the digital repository.
- * Implemented using standard ES6 OOP (familiar to Java / OOP developers).
- * 
- * Responsibilities:
- * - Encapsulates player state (lives, score, XP, invulnerability, stash shield).
- * - Manages Phaser Arcade Physics body (velocity, gravity, collision bounds).
- * - Smooth platforming feel with coyote time, jump apex boost, and squash & stretch.
- * - Dynamic sprite animation (Idle, Running, Jumping) and audio effects.
- * - Visual Stash Shield orbital aura and damage absorption.
- */
-
+// Player character logic
 class Player {
-    /**
-     * @param {Phaser.Scene} scene The active Phaser game scene
-     * @param {number} x Initial horizontal coordinate
-     * @param {number} y Initial vertical coordinate
-     */
     constructor(scene, x, y) {
         this.scene = scene;
         this.startX = x;

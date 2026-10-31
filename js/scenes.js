@@ -1,19 +1,3 @@
-/**
- * COMMIT QUEST — Scene Controllers (scenes.js)
- * 
- * Manages the distinct game screens and states using Phaser 3 Scene architecture.
- * Implemented with clear OOP classes:
- * 1. BootScene: Generates procedural pixel-art assets and sets up global caches.
- * 2. MainMenuScene: Interactive title screen with start, instructions, and difficulty options.
- * 3. InstructionsScene: Teaches controls, Git concepts, and mission objectives.
- * 4. GameScene: Core platformer gameplay scene (handles Level 1, 2, and 3 progression).
- * 5. VictoryScene: Displayed upon completing all Git challenges and restoring the repository.
- * 6. PauseScene: Modal overlay for resuming, restarting, or quitting.
- */
-
-// =============================================================================
-// 1. BOOT SCENE — PROCEDURAL PIXEL-ART TEXTURE GENERATOR
-// =============================================================================
 class BootScene extends Phaser.Scene {
     constructor() {
         super({ key: "BootScene" });

@@ -1,25 +1,10 @@
-/**
- * COMMIT QUEST — Challenge Manager (challenges.js)
- * 
- * Defines the educational objectives and criteria for each level.
- * Formulates tasks as software engineering goals (rather than spoiling raw commands).
- * Evaluates the GitEngine state to determine when a challenge is complete,
- * awards scoring (+100 for correct steps, -20 for errors),
- * and triggers level progression.
- */
-
 class ChallengeManager {
-    /**
-     * @param {GitEngine} gitEngine 
-     */
     constructor(gitEngine) {
         this.git = gitEngine;
         this.currentLevel = 1;
         this.currentStep = 0;
         this.isCompleted = false;
 
-        // Challenge definitions mapped by Level
-        // Tasks present real development goals; commands are discovered in the platforming game world.
         this.levels = {
             1: {
                 title: "LEVEL 1: THE WORKING DIRECTORY",
@@ -90,9 +75,6 @@ class ChallengeManager {
         };
     }
 
-    /**
-     * Sets the active level and resets step progress.
-     */
     loadLevel(levelNumber) {
         this.currentLevel = levelNumber;
         this.currentStep = 0;
@@ -100,26 +82,16 @@ class ChallengeManager {
         this.git.reset(levelNumber);
     }
 
-    /**
-     * Gets the definition for the active level.
-     */
     getCurrentLevel() {
         return this.levels[this.currentLevel];
     }
 
-    /**
-     * Gets the active task object.
-     */
     getCurrentTask() {
         const lvl = this.getCurrentLevel();
         if (!lvl || this.currentStep >= lvl.tasks.length) return null;
         return lvl.tasks[this.currentStep];
     }
 
-    /**
-     * Evaluates whether the user's latest command satisfied the active task.
-     * @returns {{ advanced: boolean, isLevelComplete: boolean, message: string }}
-     */
     evaluate() {
         const task = this.getCurrentTask();
         if (!task) {

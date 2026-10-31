@@ -1,22 +1,5 @@
-/**
- * COMMIT QUEST — Git Engine (gitEngine.js)
- * 
- * A pure JavaScript simulation of a Git repository.
- * Completely decoupled from Phaser so it is easy to understand, test,
- * and explain during a college lab evaluation.
- * 
- * Supported commands:
- * - git init
- * - git status
- * - git add <file> / git add .
- * - git commit -m "message"
- * - git log / git log --oneline
- * - git branch / git branch <name>
- * - git switch <name> / git checkout <name>
- * - git merge <name>
- * - git push
- * - clear / help
- */
+// Simulated Git repository engine
+
 
 class GitEngine {
     constructor() {

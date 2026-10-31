@@ -1,16 +1,5 @@
-/**
- * COMMIT QUEST — Terminal UI Controller (ui.js)
- * 
- * Manages the interactive DOM terminal interface.
- * Ensures player keystrokes in the terminal never leak into Phaser gameplay physics.
- * Integrates GitEngine simulation and ChallengeManager evaluation.
- */
-
+// Terminal overlay UI and input handling
 class TerminalUI {
-    /**
-     * @param {GitEngine} gitEngine 
-     * @param {ChallengeManager} challengeManager 
-     */
     constructor(gitEngine, challengeManager) {
         this.git = gitEngine;
         this.challenges = challengeManager;

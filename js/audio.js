@@ -1,16 +1,4 @@
-/**
- * COMMIT QUEST — Audio Engine (audio.js)
- * 
- * Implements an authentic 8-bit chiptune audio synthesizer using the Web Audio API.
- * 
- * Advantages for College Multimedia Lab:
- * - 100% offline: Synthesizes waveforms (Square, Triangle, Sawtooth, White Noise) programmatically.
- * - Zero external .mp3/.wav dependencies: immune to 404s or broken file paths.
- * - Demonstrates core multimedia concepts: oscillators, gain nodes, ADSR envelopes, and frequency modulation.
- * - Provides background music, jump, collection, damage, warp, and challenge fanfare effects.
- * - Handles browser autoplay security policies gracefully.
- */
-
+// Synthesizes 8-bit chiptune audio via Web Audio API
 class SoundEngine {
     constructor() {
         this.ctx = null;
@@ -19,46 +7,35 @@ class SoundEngine {
         this.bgmTimer = null;
         this.bgmNoteIndex = 0;
 
-        // Chiptune BGM Melody Notes (Frequencies in Hz)
-        // Classic uplifting 8-bit retro gaming melody
         this.bgmPattern = [
-            { freq: 261.63, dur: 0.18 }, // C4
-            { freq: 329.63, dur: 0.18 }, // E4
-            { freq: 392.00, dur: 0.18 }, // G4
-            { freq: 523.25, dur: 0.25 }, // C5
-            { freq: 392.00, dur: 0.18 }, // G4
-            { freq: 440.00, dur: 0.18 }, // A4
-            { freq: 523.25, dur: 0.25 }, // C5
-            { freq: 440.00, dur: 0.18 }, // A4
-            { freq: 349.23, dur: 0.18 }, // F4
-            { freq: 392.00, dur: 0.18 }, // G4
-            { freq: 440.00, dur: 0.18 }, // A4
-            { freq: 392.00, dur: 0.25 }, // G4
-            { freq: 329.63, dur: 0.18 }, // E4
-            { freq: 293.66, dur: 0.18 }, // D4
-            { freq: 261.63, dur: 0.35 }  // C4
+            { freq: 261.63, dur: 0.18 },
+            { freq: 329.63, dur: 0.18 },
+            { freq: 392.00, dur: 0.18 },
+            { freq: 523.25, dur: 0.25 },
+            { freq: 392.00, dur: 0.18 },
+            { freq: 440.00, dur: 0.18 },
+            { freq: 523.25, dur: 0.25 },
+            { freq: 440.00, dur: 0.18 },
+            { freq: 349.23, dur: 0.18 },
+            { freq: 392.00, dur: 0.18 },
+            { freq: 440.00, dur: 0.18 },
+            { freq: 392.00, dur: 0.25 },
+            { freq: 329.63, dur: 0.18 },
+            { freq: 293.66, dur: 0.18 },
+            { freq: 261.63, dur: 0.35 }
         ];
     }
 
-    /**
-     * Initializes AudioContext upon user gesture (avoids browser autoplay block).
-     */
     initAudioContext() {
         if (!this.ctx) {
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx) {
-                this.ctx = new AudioCtx();
-            }
+            if (AudioCtx) this.ctx = new AudioCtx();
         }
         if (this.ctx && this.ctx.state === "suspended") {
             this.ctx.resume();
         }
     }
 
-    /**
-     * Toggles sound on and off.
-     * @returns {boolean} New mute state
-     */
     toggleMute() {
         this.isMuted = !this.isMuted;
         if (this.isMuted) {
@@ -69,9 +46,6 @@ class SoundEngine {
         return this.isMuted;
     }
 
-    // =========================================================================
-    // BACKGROUND MUSIC (BGM) LOOP
-    // =========================================================================
     startBGM() {
         if (this.isMuted || this.isPlayingBGM) return;
         this.initAudioContext();
@@ -96,23 +70,13 @@ class SoundEngine {
 
         const note = this.bgmPattern[this.bgmNoteIndex];
         this.playTone(note.freq, "triangle", note.dur * 0.9, 0.04);
-
-        // Advance note index
         this.bgmNoteIndex = (this.bgmNoteIndex + 1) % this.bgmPattern.length;
 
-        // Schedule next note
         this.bgmTimer = setTimeout(() => {
             this.scheduleNextBgmNote();
         }, note.dur * 1000);
     }
 
-    // =========================================================================
-    // SOUND EFFECTS (SFX)
-    // =========================================================================
-
-    /**
-     * Jump SFX: Rising frequency slide on square wave.
-     */
     playJump() {
         if (this.isMuted) return;
         this.initAudioContext();
@@ -135,29 +99,23 @@ class SoundEngine {
         osc.stop(this.ctx.currentTime + 0.15);
     }
 
-    /**
-     * File Collect SFX: High-pitched double chime.
-     */
     playCollect() {
         if (this.isMuted) return;
         this.initAudioContext();
         if (!this.ctx) return;
 
-        this.playTone(587.33, "sine", 0.08, 0.1); // D5
+        this.playTone(587.33, "sine", 0.08, 0.1);
         setTimeout(() => {
-            this.playTone(880.00, "sine", 0.12, 0.12); // A5
+            this.playTone(880.00, "sine", 0.12, 0.12);
         }, 70);
     }
 
-    /**
-     * Commit Crystal SFX: Fast ascending 3-note arpeggio.
-     */
     playCrystal() {
         if (this.isMuted) return;
         this.initAudioContext();
         if (!this.ctx) return;
 
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        const notes = [523.25, 659.25, 783.99, 1046.50];
         notes.forEach((f, idx) => {
             setTimeout(() => {
                 this.playTone(f, "triangle", 0.09, 0.1);
@@ -165,9 +123,6 @@ class SoundEngine {
         });
     }
 
-    /**
-     * Stash Shield SFX: Shimmering metallic tone.
-     */
     playShield() {
         if (this.isMuted) return;
         this.initAudioContext();
@@ -181,9 +136,6 @@ class SoundEngine {
         });
     }
 
-    /**
-     * Hazard Collision / Damage SFX: Low crunch sawtooth burst.
-     */
     playDamage() {
         if (this.isMuted) return;
         this.initAudioContext();
@@ -206,19 +158,16 @@ class SoundEngine {
         osc.stop(this.ctx.currentTime + 0.25);
     }
 
-    /**
-     * Git Challenge Correct SFX: Triumphant 4-note victory fanfare.
-     */
     playSuccess() {
         if (this.isMuted) return;
         this.initAudioContext();
         if (!this.ctx) return;
 
         const fanfare = [
-            { f: 523.25, d: 0.10 }, // C5
-            { f: 659.25, d: 0.10 }, // E5
-            { f: 783.99, d: 0.12 }, // G5
-            { f: 1046.50, d: 0.35 } // C6
+            { f: 523.25, d: 0.10 },
+            { f: 659.25, d: 0.10 },
+            { f: 783.99, d: 0.12 },
+            { f: 1046.50, d: 0.35 }
         ];
 
         let delay = 0;
@@ -230,9 +179,6 @@ class SoundEngine {
         });
     }
 
-    /**
-     * Git Challenge Failure SFX: Double buzz error tone.
-     */
     playFailure() {
         if (this.isMuted) return;
         this.initAudioContext();
@@ -244,9 +190,6 @@ class SoundEngine {
         }, 130);
     }
 
-    /**
-     * Branch Portal Warp SFX: Frequency sweep.
-     */
     playWarp() {
         if (this.isMuted) return;
         this.initAudioContext();
@@ -269,9 +212,6 @@ class SoundEngine {
         osc.stop(this.ctx.currentTime + 0.3);
     }
 
-    /**
-     * Helper to play an individual synthetic tone with envelope.
-     */
     playTone(frequency, type, duration, volume = 0.1) {
         if (!this.ctx) return;
 
@@ -292,5 +232,4 @@ class SoundEngine {
     }
 }
 
-// Global Sound Engine singleton instance
 window.soundEngine = new SoundEngine();
