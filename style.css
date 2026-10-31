@@ -1,0 +1,105 @@
+/*
+ * COMMIT QUEST — Retro Cyberpunk Stylesheet (style.css)
+ * Uses clean Vanilla CSS with modern flexbox and terminal-themed color tokens.
+ */
+
+:root {
+    --bg-dark: #0d1117;
+    --panel-dark: #161b22;
+    --border-color: #30363d;
+    --text-primary: #f0f6fc;
+    --text-muted: #8b949e;
+    --git-green: #2ea043;
+    --terminal-green: #39ff14;
+    --git-blue: #58a6ff;
+    --git-purple: #bc8cff;
+    --git-red: #f85149;
+    --font-mono: "Courier New", Courier, "Cascadia Code", monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Outer Wrapper for Game & UI */
+#app-root {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #161b22 0%, #090d12 100%);
+}
+
+/* Canvas Container */
+#game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Phaser Canvas */
+#game-container canvas {
+    display: block;
+    box-shadow: 0 0 35px rgba(46, 160, 67, 0.25), 0 0 80px rgba(0, 0, 0, 0.85);
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Terminal Overlay Modal (Prepared for Milestone 4/5) */
+#terminal-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 760px;
+    max-width: 90vw;
+    height: 480px;
+    max-height: 85vh;
+    background: rgba(13, 17, 23, 0.96);
+    border: 2px solid var(--terminal-green);
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(57, 255, 20, 0.3);
+    display: none; /* Shown dynamically via UI */
+    flex-direction: column;
+    z-index: 100;
+}
+
+/* CRT Scanline Effect (Subtle retro screen aesthetic) */
+.scanlines::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.45;
+}

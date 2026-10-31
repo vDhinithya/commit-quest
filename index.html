@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commit Quest — Every Commit Counts. Every Branch Tells a Story.</title>
+    <meta name="description" content="A retro pixel-art 2D side-scrolling arcade game with interactive Git learning for Multimedia Systems Lab.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="scanlines">
+    <div id="app-root">
+        <!-- Phaser Game Viewport -->
+        <main id="game-container"></main>
+
+        <!-- Interactive Git Terminal Overlay (Integrated in Milestone 4) -->
+        <div id="terminal-overlay" role="dialog" aria-labelledby="terminal-title">
+            <header class="terminal-header" style="background:#161b22; padding:10px 16px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #30363d;">
+                <span id="terminal-title" style="color:#39ff14; font-weight:bold;">bash &mdash; git-terminal@repository-core</span>
+                <span style="color:#8b949e; font-size:12px;">Press [ESC] to Exit Terminal</span>
+            </header>
+            <div id="terminal-body" style="flex:1; padding:16px; overflow-y:auto; color:#f0f6fc; font-family:'Courier New', monospace; font-size:14px; line-height:1.4;">
+                <div id="terminal-output"></div>
+                <div style="display:flex; align-items:center; margin-top:8px;">
+                    <span style="color:#58a6ff; margin-right:8px;">dev@repo:~$</span>
+                    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" style="flex:1; background:transparent; border:none; color:#39ff14; font-family:'Courier New', monospace; font-size:14px; outline:none;" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. Offline Phaser 3 Distribution (Strictly local, no CDN) -->
+    <script src="lib/phaser.min.js"></script>
+
+    <!-- 2. Game Configuration & Audio Synthesis Engine -->
+    <script src="js/config.js"></script>
+    <script src="js/audio.js"></script>
+
+    <!-- 3. Git Engine & Challenge Logic -->
+    <script src="js/gitEngine.js"></script>
+    <script src="js/challenges.js"></script>
+    <script src="js/ui.js"></script>
+
+    <!-- 4. Entities and Game Objects -->
+    <script src="js/player.js"></script>
+    <script src="js/objects.js"></script>
+
+    <!-- 5. Game Scenes (Boot, Menu, Instructions, Game Levels, Victory, Pause) -->
+    <script src="js/scenes.js"></script>
+
+    <!-- 6. Game Bootstrap -->
+    <script src="js/game.js"></script>
+</body>
+</html>
