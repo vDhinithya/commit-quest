@@ -1,86 +1,137 @@
-# COMMIT QUEST
-> *Every Commit Counts. Every Branch Tells a Story.*
+# Commit Quest (v1.0.0)
 
-A retro pixel-art 2D side-scrolling arcade game with an interactive Git learning engine, developed for the **Multimedia Systems Lab**.
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#)
+[![Tech: HTML5 / Vanilla JS](https://img.shields.io/badge/Stack-HTML5%20%7C%20CSS3%20%7C%20Vanilla%20ES6-orange.svg)](#)
+[![Engine: Phaser 3](https://img.shields.io/badge/Engine-Phaser%203.x-blue.svg)](#)
+[![Audio: Web Audio API](https://img.shields.io/badge/Audio-Web%20Audio%20API-9cf.svg)](#)
+[![Deployment: Vercel](https://img.shields.io/badge/Deployment-Vercel%20Ready-black.svg)](#)
+
+> **"Every Commit Counts. Every Branch Tells a Story."**
+
+**Commit Quest** is an educational, retro pixel-art 2D side-scrolling platformer that gamifies learning Git version control. Trapped inside a corrupted digital repository, players navigate platforming hazards, collect code knowledge tokens, and interact with a simulated bash terminal to execute genuine Git state transitions.
+
+Developed as a showcase project for the **Multimedia Systems Laboratory**.
 
 ---
 
-## 🎮 Technology Stack (STRICT Offline & No Build Tooling)
-- **HTML5 & CSS3**: Semantic layouts, CRT scanline styling, and responsive canvas scaling.
-- **Vanilla JavaScript (ES6 OOP)**: Straightforward object-oriented programming (classes, inheritance, encapsulation) designed for clarity and ease of academic explanation.
-- **Phaser 3**: High-performance 2D arcade physics engine loaded **locally** from `lib/phaser.min.js` (zero CDN, 100% offline).
-- **Zero Build Tools**: No npm, no Vite, no Webpack, no backend, no databases.
+## 🎮 Key Highlights & Features
 
----
-
-## 🚀 How to Run the Project
-
-### Option A: Using Node.js (Recommended)
-1. Open PowerShell or Terminal in the project directory:
-   ```powershell
-   cd d:\DMW\MS\retro_game
-   node server.js
-   ```
-2. Open your web browser and navigate to:
-   ```
-   http://localhost:8000
-   ```
-
-### Option B: Using VS Code Live Server
-1. Open the `retro_game` folder in VS Code.
-2. Right-click `index.html` and click **"Open with Live Server"**.
+- **Realistic Git Simulation Engine**:
+  - Independent, pure JavaScript state machine simulating the complete Git lifecycle.
+  - Implements an uninitialized state, working tree, staging area, immutable commit history tree with SHA hashes, branch management, and remote sync.
+  - Real command parser supporting `git init`, `git status`, `git add`, `git commit -m`, `git log --oneline`, `git branch`, `git switch`, `git merge`, and `git push`.
+- **Dual Gameplay Systems**:
+  - **Arcade Platformer**: Responsive physics, jumping mechanics with ground detection, collision bounds, dynamic squash & stretch, patrolling Bug Bots, floating Commit Crystals, and Stash Shields.
+  - **Interactive Terminal Overlay**: Isolated DOM terminal modal preventing keystroke leakage into game physics, with command history buffer (`↑`/`↓`), auto-completion (`Tab`), and educational hints.
+- **Synthesized 8-Bit Multimedia**:
+  - Real-time sound synthesis via native **Web Audio API** (Square, Triangle, Sawtooth, and Sine wave generators).
+  - Procedural chiptune background music (BGM) and 8 distinct sound effects (SFX) with zero external audio assets.
+- **100% Offline & Zero Dependencies**:
+  - Built without bundlers (no Vite, Webpack, or npm dependencies).
+  - Procedurally generated pixel-art textures using off-screen HTML5 canvases during initialization.
 
 ---
 
 ## 🕹️ Controls
-- **Move Left**: `A` or `Left Arrow`
-- **Move Right**: `D` or `Right Arrow`
-- **Jump**: `W`, `Up Arrow`, or `Spacebar`
-- **Pause / Resume**: `ESC`
-- **Terminal Input**: Use keyboard when interacting with checkpoint stations.
+
+| Action | Controls |
+| :--- | :--- |
+| **Move Left / Right** | `A` / `D` or `←` / `→` (Left/Right Arrows) |
+| **Jump** | `W`, `Spacebar`, or `↑` (Up Arrow) |
+| **Open Terminal** | Step onto the Checkpoint Station at the end of each sector |
+| **Audio Toggle** | `M` (or click `🔊 AUDIO [M]` in the HUD) |
+| **Pause / Resume** | `ESC` |
+| **Terminal Navigation** | `↑` / `↓` for history, `Tab` for auto-complete, `hint` for guidance |
 
 ---
 
-## 📁 Project Architecture & Directory Structure
+## 📚 Curriculum & Sector Progression
+
+```
+[Level 1: Working Directory] ──> [Level 2: Staging Ground] ──> [Level 3: Branching Battlefield] ──> [Victory]
+        git init                         git add .                         git branch feature
+        git status                       git commit -m                     git switch feature
+                                         git log --oneline                 git merge & git push
+```
+
+1. **Level 1: The Working Directory**:
+   - Focus: Repository initialization, untracked files vs. working directory state.
+   - Core Commands: `git init`, `git status`.
+2. **Level 2: The Staging Ground**:
+   - Focus: Staging area mechanics, snapshot preservation, commit messages, and history inspection.
+   - Core Commands: `git add .`, `git commit -m "..."`, `git log --oneline`.
+3. **Level 3: The Branching Battlefield**:
+   - Focus: Branch creation, context switching, conflict avoidance, fast-forward merge resolution, and remote synchronization.
+   - Core Commands: `git branch`, `git switch`, `git merge`, `git push`.
+
+---
+
+## 🛠️ Architecture & Tech Stack
+
 ```
 retro_game/
-├── index.html          # Main HTML5 entry point with canvas and terminal containers
-├── style.css           # Cyberpunk terminal theme & scanline visuals
-├── README.md           # Documentation, run instructions, and controls
-├── LAB_DEMO_GUIDE.md   # Complete student guide for oral viva and lab presentation
+├── index.html          # Application mount point and viewport layout
+├── style.css           # CRT scanline effects, styling, and letterboxing
+├── server.js           # Zero-dependency local Node.js static server
+├── vercel.json         # Vercel deployment and routing configuration
+├── README.md           # Professional project documentation
+├── LAB_DEMO_GUIDE.md   # Oral viva & professor presentation reference
 ├── lib/
-│   └── phaser.min.js   # Local Phaser 3 distribution (v3.x offline)
-├── js/
-│   ├── config.js       # Central configuration (physics, scoring, customizations)
-│   ├── audio.js        # Web Audio API 8-bit chiptune BGM & SFX synthesizer
-│   ├── player.js       # Player OOP entity (movement, jumping, lives, shield, animations)
-│   ├── scenes.js       # Phaser scenes (Boot, Main Menu, Instructions, Game, Victory, Pause)
-│   ├── game.js         # Phaser game instance bootstrap & scaling
-│   ├── objects.js      # Collectibles, hazards, shield, conflict hazards, portals
-│   ├── gitEngine.js    # Simulated Git repository engine
-│   ├── challenges.js   # Interactive terminal challenge curriculum
-│   └── ui.js           # DOM terminal overlay controller & input isolator
-└── assets/
-    ├── images/         # Custom sprites and graphics
-    └── sounds/         # Audio assets directory
+│   └── phaser.min.js   # Local Phaser 3 distribution (100% offline)
+└── js/
+    ├── config.js       # Central configuration: physics, scoring, instructor customization
+    ├── audio.js        # Web Audio API 8-bit chiptune synthesizer engine
+    ├── gitEngine.js    # Decoupled Git repository state machine
+    ├── challenges.js   # Pedagogical curriculum manager
+    ├── ui.js           # Interactive terminal DOM controller & input isolator
+    ├── player.js       # Player entity class (physics, animation, health)
+    ├── objects.js      # Collectibles, hazards, shield, conflict hazards, portals
+    ├── scenes.js       # Phaser scenes (Boot, Main Menu, Instructions, Game, Victory, Pause)
+    └── game.js         # Phaser.Game initialization and scale configuration
 ```
 
 ---
 
-## 🏆 Implementation Milestones
-- [x] **Milestone 1**: Project Setup, Local Phaser Initialization, Procedural Pixel Art Generator, Main Menu, Instructions, Basic Level 1 Scene, Player Placeholder, Pause Scene, and Transitions.
-- [x] **Milestone 2**: Smooth Player Movement, Platforming Physics, Camera Tracking, Ground Collision.
-- [x] **Milestone 3**: Collectibles (File Tokens, Commit Crystals), Hazards (Patrolling Bug Bots), Score/Lives HUD, Timer Mechanics.
-- [x] **Milestone 4**: Pure JavaScript Git Engine (repo init, staging, commits, branches, switch, merge, log) & Interactive Terminal Overlay.
-- [x] **Milestone 5**: Interactive Terminal Challenges with Step Validation, Command Auto-complete, and Dynamic Feedback.
-- [x] **Milestone 6**: Three Complete Levels with Progression:
-  - **Level 1**: The Working Directory (`git init`, `git status`)
-  - **Level 2**: The Staging Ground (`git add`, `git commit`, `git log`)
-  - **Level 3**: The Branching Battlefield (`git branch`, `git switch`, `git merge`, `git push`) -> Victory Screen
-- [x] **Milestone 7**: Audio FX & Visual Polish:
-  - Procedural Web Audio API 8-Bit Chiptune BGM Synthesizer (Zero external file dependencies)
-  - Full SFX Suite: Rising Jump glide, 2-tone File chime, 4-note Crystal arpeggio, Shimmering Stash Shield, Crunch Damage, Triumphant Fanfare, Error Buzz, and Portal Warp
-  - HUD Sound Toggle (`🔊 [M]` / `🔇 [M]`) with keyboard shortcut `[M]`
-  - Dynamic Sprite Animations: Procedural Idle, Run1/Run2 leg cycles, and Jump stretch
-  - Particle Systems: Sparkle bursts for pickups, Jump & Landing dust puffs, and Stash Shield orbital aura
-- [x] **Milestone 8**: Final Lab Submission Verification & Customization Options (Ready in `config.js`).
+## 🚀 Running Locally
+
+The application runs directly in any modern browser without build tooling or npm packages.
+
+### Method 1: Using Node.js (Included)
+```powershell
+node server.js
+```
+Navigate to `http://localhost:8000/`.
+
+### Method 2: Using VS Code Live Server
+1. Open the project folder in VS Code.
+2. Right-click `index.html` &rarr; **"Open with Live Server"**.
+
+### Method 3: Using Python
+```powershell
+python -m http.server 8000
+```
+
+---
+
+## ⚙️ Instructor Customization
+
+All scoring, level timers, difficulty settings, and grading demonstration cheats are centralized in [js/config.js](js/config.js):
+
+```javascript
+customization: {
+    difficulty: "NORMAL",                 // "EASY", "NORMAL", "HARD"
+    startingLives: 3,                     // Overrides player starting lives
+    extraLives: 0,                        // Additional bonus lives
+    bonusTimeSeconds: 0,                  // Additional time for challenges
+    scoringMultiplier: 1.0,               // Global score multiplier
+    specialCollectiblesMultiplier: 1.0,   // Point multiplier for crystals/shields
+    extraHazardsEnabled: false,           // Toggle additional obstacles
+    invincibleCheat: false                // Toggle true for live grading demos
+}
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License — see the repository for details.
